@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 @Controller
@@ -22,8 +23,6 @@ public class CheeseController {
         // pass data object, hashMap, to view
         model.addAttribute("cheeses", cheeses);
         model.addAttribute("title", "My Cheeses");
-//        model.addAttribute("cheeseValue", cheeses.values());
-//        model.addAttribute("cheeseKey", cheeses.keySet());
         return "cheese/index"; //path to templates directory that is specifically for the cheese controller
     }
 
@@ -42,5 +41,28 @@ public class CheeseController {
         // redirect to /cheese --which was specified as root beforehand, so leaving this empty sends us to root
         return "redirect:";
     }
+//
+//    @RequestMapping(value = "delete", method= RequestMethod.GET)
+//    public String displayDeleteCheeseForm(Model model){
+//        model.addAttribute("title", "Delete Cheese");
+//        return "cheese/delete";
+//    }
+//    @RequestMapping(value="delete", method=RequestMethod.POST)
+//    public String processDeleteCheeseForm(@RequestParam String cheeseName, String cheeseDescription){ //@requestparam tells spring to look for a requets parameter with the same name as the method parameter and insert it into this method call. Needs to match the html variable for spring to be able to find it
+//        cheeses.remove(cheeseName, cheeseDescription);
+//
+//        // redirect to /cheese --which was specified as root beforehand, so leaving this empty sends us to root
+//        return "redirect:";
+//    }
+
+
+//
+//    @RequestMapping(value="delete", method=RequestMethod.GET)
+//    public void deleteCheese(@RequestParam HashMap<String, String> cheese){
+//        System.out.println(cheese);
+//        cheeses.remove(cheese.keySet(), cheese.values());
+//        System.out.println(cheeses);
+//    }
+
 
 }

@@ -1,5 +1,8 @@
 body {
     font-family: sans-serif;
-    color: red;
-    display: block;
+    color: orange;
+}
+
+ul {
+    list-style: none;
 }
