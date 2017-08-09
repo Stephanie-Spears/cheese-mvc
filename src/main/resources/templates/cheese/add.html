@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title th:text="${title}">Title</title>
-</head>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
 <body>
-    <h1 th:text="${title}">Default Title</h1>
-<!--leaving off action attribute will submit the form to the same url that the form is displayed-->
-    <form method="post">
-        <input type="text" name="cheeseName"/>
-        <input type="submit" value="Add Cheese"/>
-    </form>
+<h1 th:text="${title}">Default Title</h1>
 
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post">
+    <label for ="cheeseNameID">Name</label>
+    <div>
+        <input type="text" name="cheeseName" id="cheeseNameID"/>
+    </div>
+    <label for="cheeseDescriptionID">Description</label>
+    <div>
+        <textarea name="cheeseDescription" id="cheeseDescriptionID"></textarea>
+    </div>
+    <input type="submit" value="Add Cheese" />
+</form>
 </body>
 </html>

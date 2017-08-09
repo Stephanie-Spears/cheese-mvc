@@ -6,23 +6,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @Controller
-@RequestMapping("cheese")
-public class CheeseController
-{
-    //make arraylist available within the whole class (sort of like global)
-    static ArrayList<String> cheeses = new ArrayList<>();
+@RequestMapping(value = "cheese")
+public class CheeseController {
+//    static ArrayList<String> cheeses = new ArrayList<>();
+    static HashMap<String, String> cheeses = new HashMap<>();
 
     // Request path: /cheese--because of 'cheese' above
-    @RequestMapping(value ="")
+    @RequestMapping(value = "")
     public String index(Model model){
-        // pass data object, arraylist, to view
+        // pass data object, hashMap, to view
         model.addAttribute("cheeses", cheeses);
-        model.addAttribute("title", "My Cheese");
+        model.addAttribute("title", "My Cheeses");
+//        model.addAttribute("cheeseValue", cheeses.values());
+//        model.addAttribute("cheeseKey", cheeses.keySet());
         return "cheese/index"; //path to templates directory that is specifically for the cheese controller
     }
 
@@ -35,8 +36,8 @@ public class CheeseController
 
     //handler to process the form
     @RequestMapping(value="add", method=RequestMethod.POST)
-    public String processAddCheeseForm(@RequestParam String cheeseName){ //@requestparam tells spring to look for a requets parameter with the same name as the method parameter and insert it into this method call. Needs to match the html variable for spring to be able to find it
-        cheeses.add(cheeseName);
+    public String processAddCheeseForm(@RequestParam String cheeseName, String cheeseDescription){ //@requestparam tells spring to look for a requets parameter with the same name as the method parameter and insert it into this method call. Needs to match the html variable for spring to be able to find it
+        cheeses.put(cheeseName, cheeseDescription);
 
         // redirect to /cheese --which was specified as root beforehand, so leaving this empty sends us to root
         return "redirect:";
