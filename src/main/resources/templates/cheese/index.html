@@ -10,7 +10,6 @@
 
 <ul th:each="cheese: ${cheeses}">
 <li>
-    <input type="checkbox" name="cheeseName" value="${cheese.key}"/>
     <span th:text="'Cheese: ' + ${cheese.key}"></span>
     <p th:text="'Description: ' + ${cheese.value}"></p>
 </li>
