@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.*;
-//import java.util.ArrayList;
-//import java.util.HashMap;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+//import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 //import java.util.List;
 
 
@@ -36,8 +38,11 @@ public class CheeseController {
 
     //handler to process the form
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@RequestParam String cheeseName, String cheeseDescription) { //@requestparam tells spring to look for a requets parameter with the same name as the method parameter and insert it into this method call. Needs to match the html variable for spring to be able to find it
+    public String processAddCheeseForm(@RequestParam String cheeseName, String cheeseDescription) {//@requestparam tells spring to look for a requets parameter with the same name as the method parameter and insert it into this method call. Needs to match the html variable for spring to be able to find it
+
         cheeses.put(cheeseName, cheeseDescription);
+
+
 
         // redirect to /cheese --which was specified as root beforehand, so leaving this empty sends us to root
         return "redirect:";
@@ -45,7 +50,7 @@ public class CheeseController {
 
     // controller method to display form
     @RequestMapping(value = "delete", method= RequestMethod.GET)
-    public String displayDeleteCheeseForm(Model model, String cheeseName){
+    public String displayDeleteCheeseForm(Model model){
         model.addAttribute("title", "Delete Cheese");
         model.addAttribute("cheeses", cheeses);
         return "cheese/delete";
