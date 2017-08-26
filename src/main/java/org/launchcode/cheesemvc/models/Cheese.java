@@ -19,6 +19,7 @@ public class Cheese {
 
 
     public Cheese(String name, String description) {
+//        this(); //this calls the no argument constructor for the class, given below ...allows for empty input, aside from cheeseId? ...wha
         this();
         this.name = name;
         this.description = description;
@@ -49,6 +50,11 @@ public class Cheese {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+/*need to implement in class validation*/
+    public boolean isAlphaNumeric(String s){
+        String pattern= "^[a-zA-Z0-9]*$";
+        return s.matches(pattern);
     }
 
 }
