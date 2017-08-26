@@ -23,3 +23,30 @@
 </form>
 </body>
 </html>
+<!--
+
+$ vs *: * (when nested inside a th:object selection element) evaluates expressions on selected objects (<div th:object="${session.user}"><p th:text="${firstname}">Some Name</p></div>) rather than on the whole context variables map. if there is no selected object, $ and * behave the same
+
+the asterisk syntax evaluates expressions on selected objects rather than on the whole context variables map. This is: as long as there is no selected object, the dollar and the asterisk syntaxes do exactly the same.
+
+And what is that object selection thing? A th:object attribute. Let’s use it in our user profile (userprofile.html) page:
+
+  <div th:object="${session.user}">
+    <p>Name: <span th:text="*{firstName}">Sebastian</span>.</p>
+    <p>Surname: <span th:text="*{lastName}">Pepper</span>.</p>
+    <p>Nationality: <span th:text="*{nationality}">Saturn</span>.</p>
+  </div>
+Which is exactly equivalent to:
+
+<div>
+  <p>Name: <span th:text="${session.user.firstName}">Sebastian</span>.</p>
+  <p>Surname: <span th:text="${session.user.lastName}">Pepper</span>.</p>
+  <p>Nationality: <span th:text="${session.user.nationality}">Saturn</span>.</p>
+</div>
+When an object selection is in place, the selected object will be also available to dollar expressions as the #object expression variable:
+
+<div th:object="${session.user}">
+  <p>Name: <span th:text="${#object.firstName}">Sebastian</span>.</p>
+  <p>Surname: <span th:text="${session.user.lastName}">Pepper</span>.</p>
+  <p>Nationality: <span th:text="*{nationality}">Saturn</span>.</p>
+</div> -->

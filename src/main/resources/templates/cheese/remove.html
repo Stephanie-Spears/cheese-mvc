@@ -8,8 +8,9 @@
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
+<h3 th:replace="fragments :: checklist"></h3>
 
-<h2 th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</h2>
+<!--<h2 th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</h2>-->
 
 <form method="post">
     <div th:each="cheese : ${cheeses}" class="checkbox">
@@ -23,8 +24,14 @@
 
 
     <!--<span th:errors="*{errors}" class="error text-danger"></span>-->
+    <!--<h2 th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</h2>-->
+    <!--<div th:if="${cheeses.size()}">-->
 
-    <input type="submit" value="Remove Cheese"/>
+    <!--<h3 th:unless="${!cheeses.isEmpty()}" class="text-warning">No Entries</h3>-->
+
+    <div th:if="${!cheeses.isEmpty()}">
+        <input type="submit" value="Remove Cheese"/>
+    </div>
 </form>
 
 </body>

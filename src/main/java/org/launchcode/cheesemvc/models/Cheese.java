@@ -32,6 +32,7 @@ public class Cheese {
     public int getCheeseId() {
         return cheeseId;
     }
+
     public void setCheeseId(int cheeseId) {
         this.cheeseId = cheeseId;
     }

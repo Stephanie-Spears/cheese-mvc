@@ -16,6 +16,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
 
+/* -Access Levels-
+* public : global
+* protected : subclass
+* no modifier : package
+* private : class
+* */
 
 @Controller
 @RequestMapping(value = "cheese")
@@ -61,7 +67,7 @@ public class CheeseController {
         if (cheeseIds == null){
             model.addAttribute("title", "Remove Cheese");
             model.addAttribute("cheeses", CheeseData.getAll());
-            model.addAttribute("errors", "You can't delete nothin' FOO!");
+            model.addAttribute("errors", "You can't delete NOTHIN, dummy!");
             return "cheese/remove";
         }
 
@@ -69,7 +75,6 @@ public class CheeseController {
             CheeseData.remove(cheeseId);
         }
         return "redirect:";
-
     }
 
 }
