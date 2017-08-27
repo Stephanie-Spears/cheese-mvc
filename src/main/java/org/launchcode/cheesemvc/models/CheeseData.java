@@ -1,6 +1,5 @@
 package org.launchcode.cheesemvc.models;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+//import javax.validation.*;
 import java.util.ArrayList;
 
 public class CheeseData {
@@ -8,10 +7,7 @@ public class CheeseData {
     static ArrayList<Cheese> cheeses = new ArrayList<>();
 
 
-    /* last working state access level set to public ... changing to */
-
     // getAll
-//    @Valid
     public static ArrayList<Cheese> getAll() {
         return cheeses;
     }

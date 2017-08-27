@@ -11,17 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+//import javax.validation.Valid;
+import javax.validation.*;
+
 import java.util.*;
 
-/* -Access Levels-
+
+/* -Access Levels (abstraction->hiding all but the relevant object data)-
 * public : global
 * protected : subclass
 * no modifier : package
 * private : class
 * */
+
+
+/*Typically Spring MVC apps use @Controller classes which prepare a model map with data and selects a view to be rendered. The model map allows for the complete abstraction (showing only the relevant object data) of the view technology--in Thymeleaf it is transformed into a Thymeleaf context variable, which makes all the defined variables available to expressions executed in templates
+Spring MVC calls the pieces of data that can be accessed during the execution of views "model attributes". Thymeleaf calls them "context variables". */
 
 @Controller
 @RequestMapping(value = "cheese")
@@ -34,6 +39,8 @@ public class CheeseController {
         return "cheese/index"; //path to templates directory that is specifically for the cheese controller
     }
 
+
+    /*controller method calls default Cheese constructor, which gets initialized with an id. Model class method addAttribute is called with the newly instantiated Cheese object argument--which is now accessible as a context variable in Thymeleaf templates */
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
         model.addAttribute("title", "Add Cheese");
@@ -42,6 +49,20 @@ public class CheeseController {
         return "cheese/add";
     }
 
+    /* @ModelAttribute is an annotation that binds form data with a bean
+    * When used as a method argument, it indicates the argument should be retrieved from the model. When not present, it should be first instantiated and then added to the model and once present in the model, the arguments fields should be populated from all request parameters that have matching names.
+    * -So here it checks if Cheese class is already in the form, and tries to set it locally into newCheese. If not in the form, it creates a new instance of Cheese class and sets all of the class' matching property names (from class setters and from the form context variables' names).
+    * -Since @Valid is used, the validator must ensure that any specifications (@NotNull/@Size) in the Cheese class are met. If the data currently bound in the instance doesn't pass, it will store the errors in the error property, which is then checked in the processAddCheeseForm handler. If it contains errors, they will be accessed by the View and displayed in the add.html, it will return the string 'cheese/add' which essentially just reloads the page(?).
+    * -If there are no errors, it calls CheeseData which adds the instance of Cheese to the CheeseData's arrayList, and returns a "redirect:" string, which re-routs us to the root page
+    *
+    *
+    *
+    * It accepts an optional "value", which indicates the name of the attribute. If no value is supplied to the annotation, then the value would be defaulted to the return type name in case of methods and parameter type name in case of method-parameters.(@ModelAttribute("cheese"))
+    -Here, a new instance of Cheese is created and then passed to this handler method
+
+    *  @Valid annotation on an object tells the validation framework to process (check) the annotated object
+
+    * */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCheeseForm(@ModelAttribute @Valid Cheese newCheese, Errors errors, Model model) {
         if (errors.hasErrors()) {
