@@ -17,6 +17,10 @@
     <a href="/cheese/add" class="btn btn-success">Add</a>
     <a href="/cheese/remove" class="btn btn-danger">Remove</a>
 </nav>
+<nav th:fragment="user-nav">
+    <a href="/user/" class="btn btn-primary">User</a>
+    <a href="/user/add" class="btn btn-success">Add</a>
+</nav>
 
 <h3 th:fragment="checklist" th:unless="${!cheeses.isEmpty()}" class="jumbotron text-primary">No Entries</h3>
 

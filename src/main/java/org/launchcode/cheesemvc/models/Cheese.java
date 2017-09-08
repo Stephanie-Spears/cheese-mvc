@@ -66,10 +66,10 @@ public class Cheese {
     public void setDescription(String description) {
         this.description = description;
     }
-/*need to implement in class validation*/
-    public boolean isAlphaNumeric(String s){
-        String pattern= "^[a-zA-Z0-9]*$";
-        return s.matches(pattern);
-    }
+///*need to implement in class validation*/
+//    public boolean isAlphaNumeric(String s){
+//        String pattern= "^[a-zA-Z0-9]*$";
+//        return s.matches(pattern);
+//    }
 
 }
